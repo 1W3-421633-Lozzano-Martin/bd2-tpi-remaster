@@ -1,5 +1,5 @@
-const API_URL = 'http://localhost:5000/api';
-const HUB_URL = 'http://localhost:5000/hubs/watchparty';
+const API_URL = 'https://bd2-tpi-remaster-production.up.railway.app/api';
+const HUB_URL = 'https://bd2-tpi-remaster-production.up.railway.app/hubs/watchparty';
 
 export const config = {
     apiUrl: API_URL,
