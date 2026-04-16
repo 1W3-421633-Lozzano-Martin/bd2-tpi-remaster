@@ -1,0 +1,153 @@
+<div class="room-container" id="roomContainer">
+    <div class="room-header">
+        <div class="room-info">
+            <h1 id="roomName">Sala de Películas</h1>
+            <span class="room-code">Código: <strong id="roomCode"></strong></span>
+            <button class="btn-share" id="shareBtn" title="Compartir">
+                <i class="fas fa-share-alt"></i>
+            </button>
+        </div>
+        <div class="room-actions">
+            <button class="btn-icon" id="settingsBtn" title="Configuración">
+                <i class="fas fa-cog"></i>
+            </button>
+            <button class="btn-icon" id="fullscreenBtn" title="Pantalla completa">
+                <i class="fas fa-expand"></i>
+            </button>
+            <button class="btn btn-danger btn-sm" id="leaveBtn">
+                <i class="fas fa-sign-out-alt"></i> Salir
+            </button>
+        </div>
+    </div>
+
+    <div class="room-content">
+        <div class="video-section">
+            <div class="video-container" id="videoContainer">
+                <video id="videoPlayer" playsinline>
+                    Tu navegador no soporta videos.
+                </video>
+                <div class="video-overlay" id="videoOverlay">
+                    <div class="play-button" id="playOverlay">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+                <div class="video-controls">
+                    <button class="control-btn" id="playPauseBtn">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <div class="progress-bar" id="progressBar">
+                        <div class="progress-filled" id="progressFilled"></div>
+                    </div>
+                    <span class="time-display" id="timeDisplay">0:00 / 0:00</span>
+                    <button class="control-btn" id="muteBtn">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                    <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.1" value="1">
+                </div>
+            </div>
+            
+            <div class="video-selector" id="videoSelector">
+                <h3>Seleccionar Película</h3>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="movieSearch" placeholder="Buscar películas...">
+                </div>
+                <div class="movies-list" id="moviesList"></div>
+            </div>
+        </div>
+
+        <aside class="sidebar">
+            <div class="viewers-panel">
+                <h3>
+                    <i class="fas fa-users"></i> Espectadores
+                    <span id="viewerCount" class="badge">0</span>
+                </h3>
+                <ul class="viewers-list" id="viewersList"></ul>
+            </div>
+
+            <div class="chat-panel">
+                <h3>
+                    <i class="fas fa-comments"></i> Chat
+                </h3>
+                <div class="chat-messages" id="chatMessages"></div>
+                <form class="chat-form" id="chatForm">
+                    <input type="text" id="chatInput" placeholder="Escribe un mensaje..." autocomplete="off">
+                    <button type="submit" class="btn btn-primary btn-sm">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+
+            <div class="vote-panel" id="votePanel">
+                <h3>
+                    <i class="fas fa-vote-yea"></i> Votación
+                </h3>
+                <button class="btn btn-primary btn-block" id="startVoteBtn">
+                    <i class="fas fa-bullhorn"></i> Iniciar Votación
+                </button>
+                <div class="vote-results hidden" id="voteResults">
+                    <p>Votación activa...</p>
+                    <button class="btn btn-danger btn-sm" id="endVoteBtn">Terminar</button>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <div class="room-settings hidden" id="roomSettings">
+        <h3>Configuración de la Sala</h3>
+        <form id="roomSettingsForm">
+            <div class="form-group">
+                <label for="settingsName">Nombre</label>
+                <input type="text" id="settingsName" name="name">
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-outline" id="closeSettingsBtn">Cerrar</button>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </form>
+        <button class="btn btn-danger btn-block" id="deleteRoomBtn">
+            <i class="fas fa-trash"></i> Eliminar Sala
+        </button>
+    </div>
+</div>
+
+<div class="share-modal hidden" id="shareModal">
+    <div class="modal-content">
+        <h3>Compartir Sala</h3>
+        <div class="share-options">
+            <div class="share-link">
+                <input type="text" id="shareLink" readonly>
+                <button class="btn btn-primary" id="copyLinkBtn">
+                    <i class="fas fa-copy"></i> Copiar
+                </button>
+            </div>
+            <div class="share-qr">
+                <canvas id="qrCanvas"></canvas>
+            </div>
+            <div class="share-buttons">
+                <button class="btn btn-outline" id="shareWhatsApp">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </button>
+                <button class="btn btn-outline" id="shareTwitter">
+                    <i class="fab fa-twitter"></i> Twitter
+                </button>
+            </div>
+        </div>
+        <button class="modal-close" id="closeShareModal">&times;</button>
+    </div>
+</div>
+
+<div class="password-modal hidden" id="passwordModal">
+    <div class="modal-content">
+        <h3>Sala Privada</h3>
+        <p>Esta sala requiere contraseña</p>
+        <form id="passwordForm">
+            <input type="password" id="enterPassword" placeholder="Contraseña" required>
+            <div class="form-actions">
+                <a href="/" class="btn btn-outline" data-link>Cancelar</a>
+                <button type="submit" class="btn btn-primary">Entrar</button>
+            </div>
+        </form>
+        <button class="modal-close" id="closePasswordModal">&times;</button>
+    </div>
+</div>

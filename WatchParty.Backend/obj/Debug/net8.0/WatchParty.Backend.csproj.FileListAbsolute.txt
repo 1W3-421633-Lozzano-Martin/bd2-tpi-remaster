@@ -1,0 +1,8 @@
+C:\Users\Martín\Desktop\TPI-BD2-REMASTER\WatchParty.Backend\obj\Debug\net8.0\WatchParty.Backend.csproj.AssemblyReference.cache
+C:\Users\Martín\Desktop\TPI-BD2-REMASTER\WatchParty.Backend\obj\Debug\net8.0\rpswa.dswa.cache.json
+C:\Users\Martín\Desktop\TPI-BD2-REMASTER\WatchParty.Backend\obj\Debug\net8.0\WatchParty.Backend.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Martín\Desktop\TPI-BD2-REMASTER\WatchParty.Backend\obj\Debug\net8.0\WatchParty.Backend.AssemblyInfoInputs.cache
+C:\Users\Martín\Desktop\TPI-BD2-REMASTER\WatchParty.Backend\obj\Debug\net8.0\WatchParty.Backend.AssemblyInfo.cs
+C:\Users\Martín\Desktop\TPI-BD2-REMASTER\WatchParty.Backend\obj\Debug\net8.0\WatchParty.Backend.csproj.CoreCompileInputs.cache
+C:\Users\Martín\Desktop\TPI-BD2-REMASTER\WatchParty.Backend\obj\Debug\net8.0\WatchParty.Backend.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Martín\Desktop\TPI-BD2-REMASTER\WatchParty.Backend\obj\Debug\net8.0\WatchParty.Backend.MvcApplicationPartsAssemblyInfo.cache

@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7
+    container_name: watchparty-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - watchparty-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: watchparty-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - watchparty-network
+
+  api:
+    build:
+      context: ./WatchParty.Backend
+      dockerfile: Dockerfile
+    container_name: watchparty-api
+    restart: unless-stopped
+    ports:
+      - "5000:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:8080
+      - MONGO_URI=mongodb://mongodb:27017
+      - REDIS_URL=redis:6379
+      - JWT_SECRET=YourSuperSecretKeyThatShouldBeAtLeast32Characters!
+    depends_on:
+      - mongodb
+      - redis
+    networks:
+      - watchparty-network
+
+  frontend:
+    image: nginx:alpine
+    container_name: watchparty-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    volumes:
+      - ./WatchParty.Frontend:/usr/share/nginx/html:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - api
+    networks:
+      - watchparty-network
+
+networks:
+  watchparty-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
+  redis_data:

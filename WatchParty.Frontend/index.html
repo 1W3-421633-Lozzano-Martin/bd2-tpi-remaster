@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WatchParty - Ver películas juntos en línea</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/room.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo" data-link>
+                <i class="fas fa-play-circle"></i>
+                <span>WatchParty</span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="/" class="nav-link" data-link>Salas</a>
+                <a href="/movies" class="nav-link" data-link>Películas</a>
+            </div>
+            <div class="nav-auth" id="navAuth">
+                <a href="/login" class="btn btn-outline" data-link>Iniciar Sesión</a>
+                <a href="/register" class="btn btn-primary" data-link>Registrarse</a>
+            </div>
+            <div class="nav-user hidden" id="navUser">
+                <div class="user-menu" id="userMenu">
+                    <span class="user-name" id="userName"></span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="user-dropdown hidden" id="userDropdown">
+                    <a href="/my-rooms" class="dropdown-item" data-link>
+                        <i class="fas fa-door-open"></i> Mis Salas
+                    </a>
+                    <a href="/profile" class="dropdown-item" data-link>
+                        <i class="fas fa-user"></i> Perfil
+                    </a>
+                    <button class="dropdown-item" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                    </button>
+                </div>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <main id="app"></main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <i class="fas fa-play-circle"></i>
+                <span>WatchParty</span>
+            </div>
+            <p>Ver películas juntos, sin importar la distancia.</p>
+            <div class="footer-links">
+                <a href="#">Acerca de</a>
+                <a href="#">Contacto</a>
+                <a href="#">Términos</a>
+                <a href="#">Privacidad</a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="js/app.js" type="module"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+.auth-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 200px);
+    padding: 48px 24px;
+}
+
+.auth-card {
+    background: var(--dark-2);
+    border: 1px solid var(--dark-3);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.auth-header i {
+    font-size: 48px;
+    color: var(--primary);
+    margin-bottom: 16px;
+}
+
+.auth-header h1 {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.auth-header p {
+    color: var(--gray);
+}
+
+.auth-form .btn {
+    margin-top: 8px;
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--dark-3);
+    color: var(--gray);
+}
+
+.auth-footer a {
+    color: var(--primary-light);
+    font-weight: 500;
+}
+
+.form-group input[type="checkbox"] {
+    width: auto;
+    margin-right: 8px;
+}
+
+.form-group label:has(input[type="checkbox"]) {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
