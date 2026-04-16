@@ -13,7 +13,6 @@
     <PackageReference Include="StackExchange.Redis" Version="2.7.10" />
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-    <PackageReference Include="YamlDotNet" Version="15.1.0" />
   </ItemGroup>
 
 </Project>

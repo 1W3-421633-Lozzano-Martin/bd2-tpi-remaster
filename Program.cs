@@ -11,32 +11,6 @@ using WatchParty.Backend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var configPath = Path.Combine(builder.Environment.ContentRootPath, "config.yaml");
-if (File.Exists(configPath))
-{
-    var yaml = File.ReadAllText(configPath);
-    var config = YamlDotNet.Serialization.Deserializer().Deserialize<Dictionary<string, object>>(yaml);
-    
-    if (config.TryGetValue("jwt", out var jwtSection) && jwtSection is Dictionary<object, object> jwt)
-    {
-        builder.Configuration["Jwt:Secret"] = jwt.GetValueOrDefault("secret", "")?.ToString();
-        builder.Configuration["Jwt:Issuer"] = jwt.GetValueOrDefault("issuer", "WatchParty")?.ToString();
-        builder.Configuration["Jwt:Audience"] = jwt.GetValueOrDefault("audience", "WatchParty")?.ToString();
-        builder.Configuration["Jwt:ExpirationDays"] = jwt.GetValueOrDefault("expirationDays", "7")?.ToString();
-    }
-    
-    if (config.TryGetValue("mongodb", out var mongoSection) && mongoSection is Dictionary<object, object> mongo)
-    {
-        builder.Configuration["MongoDB:ConnectionString"] = mongo.GetValueOrDefault("connectionString", "")?.ToString();
-        builder.Configuration["MongoDB:DatabaseName"] = mongo.GetValueOrDefault("databaseName", "watchparty")?.ToString();
-    }
-    
-    if (config.TryGetValue("redis", out var redisSection) && redisSection is Dictionary<object, object> redis)
-    {
-        builder.Configuration["Redis:ConnectionString"] = redis.GetValueOrDefault("connectionString", "")?.ToString();
-    }
-}
-
 var mongoConnectionString = builder.Configuration["MongoDB:ConnectionString"] 
     ?? Environment.GetEnvironmentVariable("MONGO_URI") 
     ?? "mongodb://localhost:27017";
@@ -130,12 +104,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins(
-                "http://localhost:3000",
-                "http://localhost:5500",
-                "http://127.0.0.1:3000",
-                "http://127.0.0.1:5500"
-            )
+        policy.SetIsOriginAllowed(_ => true)
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();

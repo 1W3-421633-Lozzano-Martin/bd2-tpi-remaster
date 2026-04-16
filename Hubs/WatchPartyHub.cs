@@ -9,6 +9,7 @@ public class WatchPartyHub : Hub
     private readonly IRoomService _roomService;
     private readonly IRedisService _redisService;
     private readonly IAuthService _authService;
+    private static readonly Dictionary<string, string> ConnectionRooms = new();
 
     public WatchPartyHub(
         IRoomService roomService,
@@ -34,6 +35,7 @@ public class WatchPartyHub : Hub
 
         await Groups.AddToGroupAsync(Context.ConnectionId, roomCode);
         await _redisService.AddViewerAsync(roomCode, userId, username);
+        ConnectionRooms[Context.ConnectionId] = roomCode;
 
         var viewers = await _redisService.GetRoomViewersAsync(roomCode);
         var messages = await _redisService.GetRecentMessagesAsync(roomCode);
@@ -64,6 +66,7 @@ public class WatchPartyHub : Hub
 
         await Groups.RemoveFromGroupAsync(Context.ConnectionId, roomCode);
         await _redisService.RemoveViewerAsync(roomCode, userId);
+        ConnectionRooms.Remove(Context.ConnectionId);
 
         await Clients.Group(roomCode).SendAsync("ViewerLeft", new
         {
@@ -205,11 +208,11 @@ public class WatchPartyHub : Hub
 
     public override async Task OnDisconnectedAsync(Exception? exception)
     {
-        var roomCode = GetRoomCode();
-        if (!string.IsNullOrEmpty(roomCode))
+        if (ConnectionRooms.TryGetValue(Context.ConnectionId, out var roomCode))
         {
             var userId = GetUserId();
             await _redisService.RemoveViewerAsync(roomCode, userId);
+            ConnectionRooms.Remove(Context.ConnectionId);
 
             await Clients.Group(roomCode).SendAsync("ViewerDisconnected", new
             {
@@ -224,20 +227,17 @@ public class WatchPartyHub : Hub
     private string GetUserId()
     {
         return Context.User?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value 
-            ?? Context.QueryString["userId"] 
             ?? "anonymous";
     }
 
     private string GetUsername()
     {
         return Context.User?.FindFirst(System.Security.Claims.ClaimTypes.Name)?.Value
-            ?? Context.QueryString["username"]
             ?? "Anonymous";
     }
 
     private string? GetRoomCode()
     {
-        var groups = Context.Groups.ToList();
-        return groups.FirstOrDefault();
+        return ConnectionRooms.TryGetValue(Context.ConnectionId, out var roomCode) ? roomCode : null;
     }
 }
