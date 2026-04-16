@@ -25,7 +25,7 @@ services:
 
   api:
     build:
-      context: ./WatchParty.Backend
+      context: .
       dockerfile: Dockerfile
     container_name: watchparty-api
     restart: unless-stopped
