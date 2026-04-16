@@ -1,5 +1,7 @@
+using WatchParty.Backend.Configuration;
 using WatchParty.Backend.DTOs;
 using WatchParty.Backend.Models;
+using WatchParty.Backend.Repositories;
 
 namespace WatchParty.Backend.Services;
 
