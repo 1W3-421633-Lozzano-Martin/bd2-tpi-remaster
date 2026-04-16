@@ -66,7 +66,7 @@ public class RedisService : IRedisService
         return members.Select(m =>
         {
             var parts = m.ToString().Split(':');
-            return new ViewerDto(parts[0], parts.Length > 1 ? parts[1] : "Unknown", null, DateTime.UtcNow);
+            return new ViewerDto(parts[0], parts.Length > 1 ? parts[1] : "Unknown", null, false, DateTime.UtcNow);
         });
     }
 
